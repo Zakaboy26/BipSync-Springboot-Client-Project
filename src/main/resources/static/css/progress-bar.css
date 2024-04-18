@@ -1,0 +1,11 @@
+
+.custom-progress-bar {
+    height: 10px;
+
+
+}
+
+.custom-progress-bar .progress-bar {
+    background-color: #3D8235;
+
+}

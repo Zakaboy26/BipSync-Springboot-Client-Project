@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Task</title>
+  <link th:replace="fragments/layout :: bootstrap">
+</head>
+<body>
+<div th:replace="fragments/layout :: navbar"></div>
+<div class="container">
+  <h1>Add new task</h1>
+  <form class="mt-3" th:action="@{/tasks-library/{id}/add-task (id=${employeeId})}" th:method="POST" th:object="${taskLibraryItem}">
+      <div th:fragment="taskLibraryForm">
+
+          <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+
+          <div class="mb-3">
+            <label class="form-label" th:for="*{title}">Title</label>
+            <input class="form-control" placeholder="What is the task?" type="text" th:field="*{title}"/>
+            <div class="alert alert-warning mt-1" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" th:for="*{description}">Description</label>
+            <textarea class="form-control" placeholder="Describe this task in details..." type="text" rows="3" th:field="*{description}"></textarea>
+            <div class="alert alert-warning mt-1" th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" th:for="*{type}">Type</label>
+            <select class="form-select" aria-label="Select Task Type" th:field="*{type}">
+              <option value="HR">HR</option>
+              <option value="IT">IT</option>
+              <option value="Security">Security</option>
+            </select>
+            <div class="alert alert-warning mt-1" th:errors="*{type}" th:if="${#fields.hasErrors('type')}"></div>
+          </div>
+      </div>
+
+    <div class="mb-3">
+      <button class="btn btn-success">Add Task to Library</button>
+    </div>
+
+  </form>
+</div>
+</body>
+</html>

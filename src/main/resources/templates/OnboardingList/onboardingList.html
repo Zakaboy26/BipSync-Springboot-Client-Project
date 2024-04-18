@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="eng">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Onboarding Employees Register</title>
+	<link th:replace="~{fragments/layout :: bootstrap}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+<div th:replace="fragments/layout :: navbar"></div>
+
+<div class="container">
+	<br>
+	<br>
+	<table class="table table-secondary table-bordered table-responsive-lg">
+		<tr>
+			<th>Employee's First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
+			<th>Induction Completed?</th>
+			<th>Task Creation Email</th>
+			<th>Task Edit Email</th>
+			<th>Task Reminder Email</th>
+			<th>Settings</th>
+		</tr>
+		<!-- Lists all onboarding employees from the database -->
+		<tbody>
+		<tr th:each="OnboardingEmployee: ${OnboardingEmployees}">
+			<td th:text="${OnboardingEmployee.firstName}"></td>
+			<td th:text="${OnboardingEmployee.lastName}"></td>
+			<td th:text="${OnboardingEmployee.emailAddress}"></td>
+			<td th:text="${OnboardingEmployee.inductionComplete}"></td>
+			<td th:text="${OnboardingEmployee.taskCreationEmail ? 'Sent' : 'Not Sent'}"></td>
+			<td th:text="${OnboardingEmployee.taskEditEmail ? 'Sent' : 'Not Sent'}"></td>
+			<td th:text="${OnboardingEmployee.taskReminderEmail ? 'Sent' : 'Not Sent'}"></td>
+			<td class="d-flex gap-1">
+
+				<div>
+					<a th:href="@{/on-boarding/{id}(id=${OnboardingEmployee.id})}"
+					   class="btn btn-success btn-sm">View Tasks</a>
+				</div>
+				<div sec:authorize="hasAuthority('ROLE_ADMIN')">
+					<a th:href="@{/list/edit/{id}(id=${OnboardingEmployee.id})}"
+					   class="btn btn-success btn-sm">Update</a>
+				</div>
+				<div sec:authorize="hasAuthority('ROLE_ADMIN')">
+					<a th:href="@{/list/{id}(id=${OnboardingEmployee.id})}"
+					   class="btn btn-danger btn-sm">Delete</a>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div class="row" sec:authorize="hasAuthority('ROLE_ADMIN')">
+		<div class="col-xl-2">
+			<a th:href="@{/new}" class="btn btn-dark btn-sm mb-3"> Add Employees</a>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

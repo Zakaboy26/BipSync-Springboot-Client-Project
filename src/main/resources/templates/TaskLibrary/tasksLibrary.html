@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks Library</title>
+    <link th:replace="fragments/layout :: bootstrap">
+</head>
+<body>
+<div th:replace="fragments/layout :: navbar"></div>
+
+<div class="container mx-auto">
+    <a th:href="@{/on-boarding/{id} (id=${employeeId})}" class="btn btn-outline-dark mb-3">
+        Back to Onboarding Task List
+    </a>
+    <h1>Tasks Library</h1>
+
+    <form th:action="@{/tasks-library/{id} (id=${employeeId})}" th:method="POST" class="d-inline" th:object="${taskLibrary}">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+        <input type="hidden" name="selectAll" value="true"/>
+        <input type="submit" class="btn btn-outline-success" value="Select All">
+    </form>
+
+    <form th:action="@{/tasks-library/{id} (id=${employeeId})}" th:method="POST" class="d-inline">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+        <input type="hidden" name="unselectAll" value="true"/>
+        <input type="submit" class="btn btn-outline-success" value="Unselect All">
+    </form>
+
+    <a th:href="@{/tasks-library/{id}/add-task (id=${employeeId})}" class="btn btn-outline-success">
+        Add Task To Library
+    </a>
+
+    <form th:action="@{/tasks-library/{id} (id=${employeeId})}" th:method="POST" th:object="${taskLibrary}">
+
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Selected</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="task, stat : ${taskLibrary.taskLibraryItems}">
+                    <td><input class="form-check" type="checkbox" th:field="*{taskLibraryItems[__${stat.index}__].isSelected}" th:value="${task.id}">
+                    <td>
+                        <input type="hidden" th:field="*{taskLibraryItems[__${stat.index}__].title}">
+                        <span th:text="${task.title}"></span>
+                    </td>
+                    <td>
+                        <input type="hidden" th:field="*{taskLibraryItems[__${stat.index}__].description}">
+                        <span th:text="${task.description}"></span>
+                    </td>
+                    <td>
+                        <input type="hidden" th:field="*{taskLibraryItems[__${stat.index}__].type}">
+                        <span th:text="${task.type}"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{/tasks-library/{employeeId}/edit-task/{taskId} (employeeId=${employeeId}, taskId=${task.id})}" class="btn btn-outline-secondary btn-sm">
+                            Edit
+                        </a>
+                        <a th:href="@{/tasks-library/{employeeId}/delete-task/{taskId} (employeeId=${employeeId}, taskId=${task.id})}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this task?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-success" value="Add to Checklist">
+    </form>
+</div>
+
+</body>
+</html>

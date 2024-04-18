@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+<img src="/images/BipSyncLogo.png" alt="Logo" class="logo-img">
+<div class="registration-container">
+    <header>
+        <h1>User Registration</h1>
+    </header>
+    <!-- Display errors -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+    <form name="registrationForm" th:action="@{/register}" method="post" onsubmit="return validateForm()">
+        <!-- Inline Validation Message -->
+        <div class="error-message" id="inlineValidationMessage"></div>
+        <div class="input-group">
+            <span class="fa fa-user icon"></span>
+            <label> Username: <input type="text" name="username"/> </label>
+        </div>
+
+        <div class="input-group">
+            <span class="fa fa-envelope icon"></span> <br> <br> <br>
+            <label> Email: <input type="email" name="email" /> </label>
+        </div>
+
+
+        <div class="input-group">
+            <span class="fa fa-lock icon"></span>
+            <label> Password: <input type="password" name="password"/> </label>
+        </div>
+        <div class="input-group">
+            <span class="fa fa-lock icon"></span>
+            <label> Confirm Password: <input type="password" name="confirmPassword"/> </label>
+        </div>
+        <!-- Add reCAPTCHA widget here -->
+        <div class="g-recaptcha" data-sitekey="6Lc53kgpAAAAAOtwFJURSFKF5eq0O8mdDWI2KjqG"></div>
+        <div><input type="submit" value="Register"/></div>
+    </form>
+    <footer>
+        <p>Need help? <a href="mailto:haroonmubasher11@gmail.com">Contact Support</a></p>
+    </footer>
+</div>
+<script>
+    function validateForm() {
+        var username = document.forms["registrationForm"]["username"].value;
+        var password = document.forms["registrationForm"]["password"].value;
+        var confirmPassword = document.forms["registrationForm"]["confirmPassword"].value;
+        var inlineValidationMessage = document.getElementById("inlineValidationMessage");
+
+        inlineValidationMessage.innerHTML = ""; // Clear previous messages
+
+        if (username === "" || password === "" || confirmPassword === "") {
+            inlineValidationMessage.innerHTML = "All essential fields must be filled out";
+            return false; // Prevent form submission only if there's an error
+        }
+
+        return true; // Allow form submission when there are no errors
+    }
+</script>
+</body>
+</html>

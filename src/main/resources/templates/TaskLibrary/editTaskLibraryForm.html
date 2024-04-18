@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Task</title>
+  <link th:replace="fragments/layout :: bootstrap">
+</head>
+<body>
+<div th:replace="fragments/layout :: navbar"></div>
+<div class="container">
+  <h1>Edit task</h1>
+  <form class="mt-3" th:action="@{/tasks-library/{employeeId}/edit-task/{taskId} (employeeId=${employeeId}, taskId=${taskLibraryItem.getId()})}" th:method="POST" th:object="${taskLibraryItem}">
+    <div th:replace="TaskLibrary/newTaskLibraryForm :: taskLibraryForm"></div>
+
+    <div class="mb-3">
+      <button class="btn btn-success">Edit Task</button>
+    </div>
+
+  </form>
+</div>
+</body>
+</html>
