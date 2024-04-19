@@ -1,1 +1,2 @@
-
+Java Springboot webapp as per requested by BipSync Cardiff, gherkins format for acceptance criteria was used when creating the issues (originally on gitlab but sturggled to transfer it got github), and I followed it up with TDD to show the acceptance criteria had been met which can be seen in the test classes with the given format "given, when and then"
+The Springboot webapp allows for CRUD operations and uses Thymeleaf pages and Javascript for the front end, along with the use of Spring framework and MySQL (MariaDB) for the back end (schema.sql, data.sql) 
