@@ -1,6 +1,8 @@
 # Bipsync Cardiff: Onboarding Checklist Web Application
 
-As part of my **second year at Cardiff University**, a team of four of us collaborated to develop a **web-based onboarding checklist** for the company **BipSync Cardiff**, a user-friendly tool designed to help new employees navigate their first tasks using a structured checklist format.
+As part of my second-year Software Engineering group project at Cardiff University, a team of four of us collaborated with BipSync Cardiff to develop a web-based onboarding management tool.
+
+The system helps the company’s HR team and other departments manage new employee onboarding tasks in one place. For example, HR can create a checklist for a new hire and assign setup tasks to the IT department (like preparing a laptop). Each department can then view, update, and track their assigned tasks through a simple checklist and Kanban-style board.
 
 ---
 
