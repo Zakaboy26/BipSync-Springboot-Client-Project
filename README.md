@@ -1,6 +1,6 @@
-# Onboarding Checklist Web Application — BipSync Project
+# Bipsync Cardiff: Onboarding Checklist Web Application
 
-As part of my **second year at Cardiff University**, a team of four of us collaborated to develop a **web-based onboarding checklist** for **BipSync**, a user-friendly tool designed to help new employees navigate their first tasks using a structured checklist format.
+As part of my **second year at Cardiff University**, a team of four of us collaborated to develop a **web-based onboarding checklist** for the company **BipSync Cardiff**, a user-friendly tool designed to help new employees navigate their first tasks using a structured checklist format.
 
 ---
 
